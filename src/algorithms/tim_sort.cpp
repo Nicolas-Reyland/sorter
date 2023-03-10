@@ -7,7 +7,7 @@ const size_t RUN = 32;
 
 // This function sorts array from left index
 // to right index which is of size atmost RUN
-void insertion_sort(int arr[], size_t left, size_t right)
+static void insertion_sort(int arr[], size_t left, size_t right)
 {
     for (size_t i = left + 1; i <= right; i++)
     {
@@ -23,7 +23,7 @@ void insertion_sort(int arr[], size_t left, size_t right)
 }
 
 // Merge function merges the sorted runs
-void merge(int*& arr, size_t l, size_t m, size_t r)
+static void merge(int*& arr, size_t l, size_t m, size_t r)
 {
 
     // Original array is broken in two parts

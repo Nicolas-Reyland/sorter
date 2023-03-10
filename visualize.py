@@ -23,6 +23,8 @@ def main(path: str) -> int:
     times_matrix = data[:, 1:].T
     for name, times in zip(names, times_matrix):
         plt.plot(size_arr, times, label=name)
+    plt.xlabel("array size")
+    plt.ylabel("time (µs)")
     plt.legend()
     plt.show()
     return 0

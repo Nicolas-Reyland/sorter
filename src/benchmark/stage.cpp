@@ -8,16 +8,22 @@
 #include "algorithms/sort.hpp"
 #include "algorithms/merge_sort.hpp"
 #include "algorithms/tim_sort.hpp"
+#include "algorithms/quick_sort.hpp"
+#include "algorithms/intro_sort.hpp"
 #include "arrays/arrays.hpp"
 
 void (*FUNCTIONS[])(int *&, size_t) = {
         merge_sort,
         tim_sort,
+        quick_sort,
+        intro_sort,
 };
 
 std::string FUNCTION_NAMES[] = {
         "merge_sort",
         "tim_sort",
+        "quick_sort",
+        "intro_sort",
 };
 
 constexpr size_t NUM_FUNCTIONS = sizeof(FUNCTIONS) / sizeof(FUNCTIONS[0]);
@@ -48,10 +54,10 @@ void run_stage(const struct BenchSettings &settings, size_t length) {
             total_nano_secs += delta_t.count();
             assert(is_sorted(arr_cpy, length));
         }
-        // TODO: convert to ms ?
-        size_t mean_time = total_nano_secs / settings.num_runs_per_stage;
+        // µs
+        size_t mean_micro_secs = total_nano_secs / (1000 * settings.num_runs_per_stage);
         if (settings.output != nullptr)
-            *settings.output << ',' << mean_time;
+            *settings.output << ',' << mean_micro_secs;
     }
     if (settings.output != nullptr)
         *settings.output << '\n';

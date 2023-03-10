@@ -2,4 +2,4 @@
 
 #include "sort.hpp"
 
-sort_function tim_sort;
+sort_function intro_sort;

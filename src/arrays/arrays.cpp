@@ -1,5 +1,9 @@
-#include <cstdlib>
 #include "arrays.hpp"
+
+#include <algorithm>
+#include <cstdlib>
+#include <random>
+#include <bits/stdc++.h>
 
 int *random_array(size_t length) {
     int *arr = new int[length];
