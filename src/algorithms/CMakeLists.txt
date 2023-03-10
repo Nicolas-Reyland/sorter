@@ -1,1 +1,1 @@
-target_sources(sorter PRIVATE merge_sort.cpp)
+target_sources(sorter PRIVATE merge_sort.cpp sort.cpp bubble_sort.cpp)

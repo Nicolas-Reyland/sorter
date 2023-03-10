@@ -1,6 +1,5 @@
 #include <cstdlib>
 #include "arrays.hpp"
-#include "sort.hpp"
 
 int *random_array(size_t length) {
     int *arr = new int[length];

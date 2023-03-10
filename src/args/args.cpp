@@ -1,6 +1,7 @@
 #include <cstring>
 #include <sstream>
 #include <iostream>
+#include <fstream>
 #include "args.hpp"
 
 #define ARG_IS(Name) (strcasecmp(argv[i], "--" Name) == 0)
@@ -48,6 +49,9 @@ struct BenchSettings parse_args(int argc, char **argv) {
         } else if (ARG_IS("max-value")) {
             ASSERT_ARG_HAS_VALUE
             arg_stream >> settings.max_value;
+        } else if (SHORT_ARG_IS("o") || ARG_IS("output")) {
+            ASSERT_ARG_HAS_VALUE
+            settings.output = new std::ofstream(argv[i]);
         } else if (SHORT_ARG_IS("h") || ARG_IS("help")) {
             settings.help = true;
             break;
@@ -62,4 +66,8 @@ struct BenchSettings parse_args(int argc, char **argv) {
         settings.num_stages = DF_NUM_STAGES;
 
     return settings;
+}
+
+BenchSettings::~BenchSettings() {
+    delete output;
 }

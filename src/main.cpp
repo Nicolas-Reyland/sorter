@@ -16,6 +16,7 @@ int main(int argc, char *argv[]) {
     }
 
     benchmark(settings);
+    delete settings.output;
 
     return 0;
 }
