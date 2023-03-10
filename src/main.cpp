@@ -1,9 +1,21 @@
 #include <iostream>
+#include "args/args.hpp"
+#include "benchmark/benchmark.hpp"
 
-int main(int argc, char *argv[])
-{
-    (void)argc;
-    (void)argv;
-    std::cout << "Hello, world!" << std::endl;
+int main(int argc, char *argv[]) {
+    struct BenchSettings settings = parse_args(argc, argv);
+    if (!settings.valid) {
+        std::cerr << settings.error_message << '\n';
+        return 1;
+    } else if (settings.help) {
+        std::cout
+                << "usage: ./sorter [ --max-size N ] [ --size-step N | --num-stages N ]"
+                   " [ --num-runs-per-stage N ] [ --max-value N ] [ -h ] [ --help ]"
+                << std::endl;
+        return 0;
+    }
+
+    benchmark(settings);
+
     return 0;
 }

@@ -1,0 +1,1 @@
+target_sources(sorter PRIVATE arrays.cpp)
