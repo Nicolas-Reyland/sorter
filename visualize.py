@@ -25,6 +25,7 @@ def main(path: str) -> int:
         plt.plot(size_arr, times, label=name)
     plt.legend()
     plt.show()
+    return 0
 
 
 if __name__ == "__main__":

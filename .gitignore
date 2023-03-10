@@ -1,5 +1,6 @@
 # My own stuff
 *.csv
+vgcore.*
 
 # CLion stuff
 .idea/

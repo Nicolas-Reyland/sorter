@@ -7,17 +7,17 @@
 #include "args/args.hpp"
 #include "algorithms/sort.hpp"
 #include "algorithms/merge_sort.hpp"
-#include "algorithms/bubble_sort.hpp"
+#include "algorithms/tim_sort.hpp"
 #include "arrays/arrays.hpp"
 
 void (*FUNCTIONS[])(int *&, size_t) = {
         merge_sort,
-        bubble_sort,
+        tim_sort,
 };
 
 std::string FUNCTION_NAMES[] = {
         "merge_sort",
-        "bubble_sort",
+        "tim_sort",
 };
 
 constexpr size_t NUM_FUNCTIONS = sizeof(FUNCTIONS) / sizeof(FUNCTIONS[0]);

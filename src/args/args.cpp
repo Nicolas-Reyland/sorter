@@ -68,6 +68,4 @@ struct BenchSettings parse_args(int argc, char **argv) {
     return settings;
 }
 
-BenchSettings::~BenchSettings() {
-    delete output;
-}
+BenchSettings::~BenchSettings() = default;
