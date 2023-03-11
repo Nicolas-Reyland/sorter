@@ -2,6 +2,7 @@
 
 #include <cstddef>
 #include <string>
+#include <vector>
 
 extern const size_t MIN_ARR_SIZE;
 
@@ -12,6 +13,7 @@ struct BenchSettings
     size_t num_runs_per_stage = 3;
     size_t num_stages = 0; // 0 : auto (see arr_size_step)
     int max_value = 0; // no max value
+    std::vector<std::string> algorithms;
     std::ostream* output = nullptr;
     bool valid = true;
     std::string error_message = "success";

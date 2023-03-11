@@ -15,8 +15,8 @@ int main(int argc, char* argv[])
     {
         std::cout
             << "usage: ./sorter [ --max-size N ] [ --size-step N | "
-               "--num-stages N ]"
-               " [ --num-runs-per-stage N ] [ --max-value N ] [ -h ] [ --help ]"
+               "--num-stages N ] [ --num-runs-per-stage N ] [ --max-value N ] "
+               " [ -a ALGORITHM ] [ --algorithm ALGORITHM ] [ -h ] [ --help ]"
             << std::endl;
         return 0;
     }

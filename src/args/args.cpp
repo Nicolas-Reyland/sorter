@@ -5,6 +5,8 @@
 #include <iostream>
 #include <sstream>
 
+#include "benchmark/stage.hpp"
+
 #define ARG_IS(Name) (strcasecmp(argv[i], "--" Name) == 0)
 #define SHORT_ARG_IS(Name) (strcasecmp(argv[i], "-" Name) == 0)
 
@@ -23,6 +25,13 @@
 
 const size_t MIN_ARR_SIZE = 5;
 const size_t DF_NUM_STAGES = 1000;
+
+const std::vector<std::string> DF_ALGORITHMS = {
+    "merge_sort",
+    "tim_sort",
+    "quick_sort",
+    "intro_sort",
+};
 
 struct BenchSettings parse_args(int argc, char** argv)
 {
@@ -78,6 +87,21 @@ struct BenchSettings parse_args(int argc, char** argv)
             ASSERT_ARG_HAS_VALUE
             settings.output = new std::ofstream(argv[i]);
         }
+        else if (SHORT_ARG_IS("a") || ARG_IS("algorithm"))
+        {
+            ASSERT_ARG_HAS_VALUE
+            std::string name = argv[i];
+            if (!DEFINED_ALGORITHMS.contains(name))
+            {
+                settings.error_message = "The algorithm " + name
+                    + " is not known.\nThe known algorithms are:";
+                for (auto [key, _] : DEFINED_ALGORITHMS)
+                    settings.error_message += "\n - " + key;
+                settings.valid = false;
+                break;
+            }
+            settings.algorithms.push_back(name);
+        }
         else if (SHORT_ARG_IS("h") || ARG_IS("help"))
         {
             settings.help = true;
@@ -92,8 +116,11 @@ struct BenchSettings parse_args(int argc, char** argv)
         }
     }
 
+    // default values
     if (!(settings.num_stages || settings.arr_size_step))
         settings.num_stages = DF_NUM_STAGES;
+    if (settings.algorithms.empty())
+        settings.algorithms = DF_ALGORITHMS;
 
     return settings;
 }

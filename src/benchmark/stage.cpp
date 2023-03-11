@@ -4,8 +4,6 @@
 #include <cassert>
 #include <chrono>
 #include <iostream>
-#include <map>
-#include <string>
 #include <vector>
 
 #include "algorithms/bubble_sort.hpp"
@@ -16,17 +14,10 @@
 #include "args/args.hpp"
 #include "arrays/arrays.hpp"
 
-static const std::map<std::string, void (*)(int*&, size_t)> FUNCTIONS = {
+const std::map<std::string, void (*)(int*&, size_t)> DEFINED_ALGORITHMS = {
     { "bubble_sort", &bubble_sort }, { "merge_sort", &merge_sort },
     { "tim_sort", &tim_sort },       { "quick_sort", &quick_sort },
     { "intro_sort", &intro_sort },
-};
-
-static const std::vector<std::string> FUNCTION_NAMES = {
-    "merge_sort",
-    "tim_sort",
-    "quick_sort",
-    "intro_sort",
 };
 
 void run_stage(const struct BenchSettings& settings, size_t length)
@@ -40,9 +31,9 @@ void run_stage(const struct BenchSettings& settings, size_t length)
     int* arr = settings.max_value ? random_array(length, settings.max_value)
                                   : random_array(length);
     int* arr_cpy = new int[length];
-    for (const auto& fn_name : FUNCTION_NAMES)
+    for (const auto& fn_name : settings.algorithms)
     {
-        auto function = FUNCTIONS.find(fn_name)->second;
+        auto function = DEFINED_ALGORITHMS.find(fn_name)->second;
         size_t total_nano_secs = 0;
         for (size_t run = 0; run < settings.num_runs_per_stage; ++run)
         {
@@ -73,9 +64,9 @@ void init_benchmark_output(const BenchSettings& settings)
 {
     if (settings.output != nullptr)
     {
-        *settings.output << FUNCTION_NAMES[0];
-        for (size_t i = 1; i < FUNCTION_NAMES.size(); ++i)
-            *settings.output << ',' << FUNCTION_NAMES[i];
+        *settings.output << settings.algorithms[0];
+        for (size_t i = 1; i < settings.algorithms.size(); ++i)
+            *settings.output << ',' << settings.algorithms[i];
 
         *settings.output << '\n';
     }
