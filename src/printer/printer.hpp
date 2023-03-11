@@ -2,4 +2,4 @@
 
 #include <cstddef>
 
-void print_array(int *array, size_t length);
+void print_array(int* array, size_t length);

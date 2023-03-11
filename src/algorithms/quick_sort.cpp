@@ -2,12 +2,13 @@
 
 #include <algorithm>
 
-static int partition(int arr[], ssize_t start, ssize_t end) {
-
+static int partition(int arr[], ssize_t start, ssize_t end)
+{
     int pivot = arr[start];
 
     ssize_t count = 0;
-    for (ssize_t i = start + 1; i <= end; i++) {
+    for (ssize_t i = start + 1; i <= end; i++)
+    {
         if (arr[i] <= pivot)
             count++;
     }
@@ -19,17 +20,20 @@ static int partition(int arr[], ssize_t start, ssize_t end) {
     // Sorting left and right parts of the pivot element
     ssize_t i = start, j = end;
 
-    while (i < pivot_index && j > pivot_index) {
-
-        while (arr[i] <= pivot) {
+    while (i < pivot_index && j > pivot_index)
+    {
+        while (arr[i] <= pivot)
+        {
             i++;
         }
 
-        while (arr[j] > pivot) {
+        while (arr[j] > pivot)
+        {
             j--;
         }
 
-        if (i < pivot_index && j > pivot_index) {
+        if (i < pivot_index && j > pivot_index)
+        {
             std::swap(arr[i++], arr[j--]);
         }
     }
@@ -37,8 +41,8 @@ static int partition(int arr[], ssize_t start, ssize_t end) {
     return pivot_index;
 }
 
-static void quick_sort_(int arr[], ssize_t start, ssize_t end) {
-
+static void quick_sort_(int arr[], ssize_t start, ssize_t end)
+{
     // base case
     if (start >= end)
         return;
@@ -53,6 +57,7 @@ static void quick_sort_(int arr[], ssize_t start, ssize_t end) {
     quick_sort_(arr, p + 1, end);
 }
 
-void quick_sort(int *&arr, size_t length) {
+void quick_sort(int*& arr, size_t length)
+{
     quick_sort_(arr, 0, length - 1);
 }

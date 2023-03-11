@@ -51,7 +51,7 @@ static ssize_t partition(int a[], ssize_t low, ssize_t high)
     }
 
     // swap `p_index` with pivot
-    std::swap (a[p_index], a[high]);
+    std::swap(a[p_index], a[high]);
 
     // return `p_index` (index of the pivot element)
     return p_index;
@@ -71,24 +71,27 @@ static ssize_t rand_partition(int a[], ssize_t low, ssize_t high)
 }
 
 // Function to perform heapsort on the given range of elements
-static void heapsort(int *begin, int *end)
+static void heapsort(int* begin, int* end)
 {
     std::make_heap(begin, end);
     std::sort_heap(begin, end);
 }
 
 // Function to perform intro_sort_ on the given array
-static void intro_sort_(int a[], int *begin, int *end, int maxdepth)
+static void intro_sort_(int a[], int* begin, int* end, int maxdepth)
 {
     // perform insertion sort if partition size is 16 or smaller
-    if ((end - begin) < 16) {
+    if ((end - begin) < 16)
+    {
         insertion_sort(a, begin - a, end - a);
     }
-        // perform heapsort if the maximum depth is 0
-    else if (maxdepth == 0) {
+    // perform heapsort if the maximum depth is 0
+    else if (maxdepth == 0)
+    {
         heapsort(begin, end + 1);
     }
-    else {
+    else
+    {
         // otherwise, perform Quicksort
         ssize_t pivot = rand_partition(a, begin - a, end - a);
         intro_sort_(a, begin, a + pivot - 1, maxdepth - 1);
@@ -96,7 +99,8 @@ static void intro_sort_(int a[], int *begin, int *end, int maxdepth)
     }
 }
 
-void intro_sort(int *& arr, size_t length) {
+void intro_sort(int*& arr, size_t length)
+{
     int max_depth = 2 * (int)std::log(length);
     intro_sort_(arr, arr, arr + length - 1, max_depth);
 }

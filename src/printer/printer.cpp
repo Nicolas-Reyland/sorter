@@ -1,8 +1,11 @@
-#include <iostream>
 #include "printer.hpp"
 
-void print_array(int *array, size_t length) {
-    if (array == nullptr) {
+#include <iostream>
+
+void print_array(int* array, size_t length)
+{
+    if (array == nullptr)
+    {
         std::cout << "[null array";
         goto EndOfPrint;
     }
@@ -13,6 +16,6 @@ void print_array(int *array, size_t length) {
     for (size_t i = 1; i < length; ++i)
         std::cout << ", " << array[i];
 
-    EndOfPrint:
+EndOfPrint:
     std::cout << ']' << std::endl;
 }

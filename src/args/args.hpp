@@ -5,7 +5,8 @@
 
 extern const size_t MIN_ARR_SIZE;
 
-struct BenchSettings {
+struct BenchSettings
+{
     size_t arr_size_limit = 1E6;
     size_t arr_size_step = 0; // 0 : auto (see num_stages)
     size_t num_runs_per_stage = 3;
@@ -18,4 +19,4 @@ struct BenchSettings {
     ~BenchSettings();
 };
 
-struct BenchSettings parse_args(int argc, char *argv[]);
+struct BenchSettings parse_args(int argc, char* argv[]);
