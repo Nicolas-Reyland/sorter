@@ -22,7 +22,8 @@ int main(int argc, char* argv[])
     }
 
     benchmark(settings);
-    delete settings.output;
+    if (settings.output != &std::cout)
+        delete settings.output;
 
     return 0;
 }

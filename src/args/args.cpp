@@ -38,6 +38,7 @@ struct BenchSettings parse_args(int argc, char** argv)
     struct BenchSettings settings
     {};
     // TODO: validate values
+    settings.help = argc < 2;
 
     int max_i = argc - 1;
     for (int i = 1; i < argc; ++i)
@@ -121,6 +122,8 @@ struct BenchSettings parse_args(int argc, char** argv)
         settings.num_stages = DF_NUM_STAGES;
     if (settings.algorithms.empty())
         settings.algorithms = DF_ALGORITHMS;
+    if (settings.output == nullptr)
+        settings.output = &std::cout;
 
     return settings;
 }

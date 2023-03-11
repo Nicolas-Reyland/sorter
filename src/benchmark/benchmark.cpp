@@ -4,7 +4,7 @@
 
 #include "stage.hpp"
 
-#define PBSTR "============================================================"
+#define PBSTR "############################################################"
 #define PBWIDTH 60
 
 static void print_progress(double percentage);
@@ -38,20 +38,26 @@ void benchmark(const struct BenchSettings& settings)
         // run the stage
         run_stage(settings, arr_size);
         // progress bar
-        if (percentage - last_percentage >= 1)
+        if (settings.output != &std::cout)
         {
-            print_progress((double)percentage / 100);
-            last_percentage = percentage;
+            if (percentage - last_percentage >= 1)
+            {
+                print_progress((double)percentage / 100);
+                last_percentage = percentage;
+            }
+            curr_processed_size += arr_size;
+            percentage = (int)(((size_t)100 * curr_processed_size)
+                               / total_processed_size);
         }
-        curr_processed_size += arr_size;
-        percentage =
-            (int)(((size_t)100 * curr_processed_size) / total_processed_size);
         // prepare the next stage
         arr_size += size_increment;
     }
-    print_progress(1.0);
-    std::cout << std::endl
-              << "Done running " << num_stages << " stages" << std::endl;
+    if (settings.output != &std::cout)
+    {
+        print_progress(1.0);
+        std::cout << std::endl
+                  << "Done running " << num_stages << " stages" << std::endl;
+    }
 }
 
 static void print_progress(double percentage)
